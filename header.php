@@ -9,13 +9,16 @@ echo "
             <div class='collapse navbar-collapse' id='navbarNav'>
                 <ul class='navbar-nav'>
                     <li class='nav-item'>
-                        <a class='nav-link' aria-current='page' href='/crud/dashboard.php'>Dashboard</a>
+                        <a class='nav-link' aria-current='page' href='/php-product-manager/dashboard.php'>Dashboard</a>
                     </li>
                     <li class='nav-item'>
-                        <a class='nav-link' href='/crud/products.php'>Products</a>
+                        <a class='nav-link' href='/php-product-manager/users.php'>Users</a>
                     </li>
                     <li class='nav-item'>
-                        <a class='nav-link' href='/crud/categories.php'>Categories</a>
+                        <a class='nav-link' href='/php-product-manager/products.php'>Products</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a class='nav-link' href='/php-product-manager/categories.php'>Categories</a>
                     </li>
                 </ul>
             </div>

@@ -12,15 +12,20 @@
 <body>
     <?php include 'header.php'; ?>
     <div class="container my-5">
-        <a href="/php-product-manager/product/create.php" class="btn btn-primary">Add Product</a><br>
-        <h2>List of Products</h2>
+        <a href="/php-product-manager/user/create.php" class="btn btn-primary">Add User</a><br>
+        <h2>List of Users</h2>
         <table class="table table-responsive table-info table-hover">
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Company Name</th>
+                    <th>Phone</th>
+                    <th>Country</th>
+                    <th>Comapny Type</th>
+                    <th>Payment Method</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -28,9 +33,7 @@
                 <?php
                     include 'db.php';
                     
-                    $sql="SELECT products.id, products.name, products.price, categories.name AS category_name 
-                    FROM products 
-                    INNER JOIN categories ON products.category_id = categories.id";
+                    $sql="SELECT * FROM users";
                     $result=$conn->query($sql);
 
                     if(!$result){
@@ -42,11 +45,16 @@
                         <tr>
                             <td>$row[id]</td>
                             <td>$row[name]</td>
-                            <td>$row[price]</td>
-                            <td>$row[category_name]</td>
+                            <td>$row[email]</td>
+                            <td>$row[password]</td>
+                            <td>$row[companyName]</td>
+                            <td>$row[phone]</td>
+                            <td>$row[country]</td>
+                            <td>$row[companyType]</td>
+                            <td>$row[paymentMethod]</td>
                             <td>
-                                <a class='btn btn-primary btn-sm' href='/php-product-manager/product/edit.php?id=$row[id]'>Edit</a>
-                                <a class='btn btn-primary btn-sm' href='/php-product-manager/product/delete.php?id=$row[id]'>Delete</a>
+                                <a class='btn btn-primary btn-sm' href='/php-product-manager/user/edit.php?id=$row[id]'>Edit</a>
+                                <a class='btn btn-primary btn-sm' href='/php-product-manager/user/delete.php?id=$row[id]'>Delete</a>
                             </td>
                         </tr>
                         ";
