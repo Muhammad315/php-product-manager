@@ -15,6 +15,7 @@
             background: url('login-background.jpg') no-repeat center center fixed;
             background-size: cover;
         }
+
         .card {
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.1);
@@ -29,36 +30,12 @@
 </head>
 
 <body>
-    <div class="card">
-        <h2 class="text-center text-white">Admin Login</h2>
-        <?php
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                include 'db.php';
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-
-                $sql = "SELECT * FROM users WHERE name = '$username' AND password = '$password' LIMIT 1";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    header("Location: dashboard.php");
-                    exit();
-                } else {
-                    echo "<div class='alert alert-danger'>Invalid credentials</div>";
-                }
-            }
-        ?>
-        <form method="post" action="">
-            <div class="mb-3">
-                <label for="username" class="form-label text-white">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label text-white">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
+    <div class="card p-4">
+        <h2 class="text-center text-white mb-4">Product Management System</h2>
+        <div class="d-flex justify-content-between">
+            <a href="/php-product-manager/signup.php" class="btn btn-primary w-45">Sign Up</a>
+            <a href="/php-product-manager/login.php" class="btn btn-primary w-45">Login</a>
+        </div>
     </div>
 </body>
 
