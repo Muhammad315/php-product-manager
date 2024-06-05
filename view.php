@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'user') {
+    header('Location: login.php');
+    exit;
+}
+
 include 'db.php';
 
 $categoriesSql = "SELECT * FROM categories";
@@ -12,11 +19,13 @@ $categoriesResult = $conn->query($categoriesSql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="general.css">
-    <title>PMS</title>
+    <title>PMS | Home</title>
 </head>
 <body>
     <div class="container mt-5">
         <h2 class="text-center">Product Management System</h2>
+        <p>Welcome, <?php echo $_SESSION['username']; ?>!</p>
+        <a href="logout.php" class="btn btn-danger mb-4">Logout</a>
         <div class="row mt-4">
             <div class="col-md-4">
                 <h4>Categories</h4>
@@ -59,3 +68,5 @@ $categoriesResult = $conn->query($categoriesSql);
     </script>
 </body>
 </html>
+
+<?php $conn->close(); ?>
