@@ -1,6 +1,40 @@
+<?php
+session_start();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    include 'db.php';
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $stmt = $conn->prepare("SELECT id, role FROM users WHERE name = ? AND password = ? LIMIT 1;");
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $stmt->store_result();
+    
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($id, $role);
+        $stmt->fetch();
+        
+        // Store user data in session variables
+        $_SESSION['user_id'] = $id;
+        $_SESSION['username'] = $username;
+        $_SESSION['role'] = $role;
+        
+        // Redirect based on user role
+        if ($role == 'admin') {
+            header("Location: dashboard.php");
+        } elseif ($role == 'user') {
+            header("Location: view.php");
+        }
+        exit();
+    } else {
+        echo "<div class='alert alert-danger'>Invalid credentials</div>";
+    }
+    $stmt->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,39 +59,11 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
-    <title>Admin Login</title>
+    <title>PMS | Login</title>
 </head>
-
 <body>
     <div class="card">
-        <h2 class="text-center text-white">Admin Login</h2>
-        <?php
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                include 'db.php';
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-
-                $sql = "SELECT * FROM users WHERE name = '$username' AND password = '$password' AND role = 'admin' LIMIT 1;";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    header("Location: dashboard.php");
-                    exit();
-                } else {
-                    echo "<div class='alert alert-danger'>Invalid credentials</div>";
-                }
-
-                $sql = "SELECT * FROM users WHERE name = '$username' AND password = '$password' AND role = 'user' LIMIT 1;";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    header("Location: view.php");
-                    exit();
-                } else {
-                    echo "<div class='alert alert-danger'>Invalid credentials</div>";
-                }
-            }
-        ?>
+        <h2 class="text-center text-white">Login</h2>
         <form method="post" action="">
             <div class="mb-3">
                 <label for="username" class="form-label text-white">Username</label>
@@ -71,5 +77,4 @@
         </form>
     </div>
 </body>
-
 </html>

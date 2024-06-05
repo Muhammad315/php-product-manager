@@ -24,5 +24,10 @@ echo "
             </div>
         </div>
     </nav>
+    <div class='container my-5'>
+        <h2>Admin Dashboard</h2>
+        <p>Welcome, $_SESSION[username]!</p>
+        <a href='logout.php' class='btn btn-danger mb-4'>Logout</a>
+    </div>
 ";
 ?>

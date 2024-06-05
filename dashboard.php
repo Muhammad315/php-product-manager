@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Check if the user is logged in and has the role 'admin'
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    header('Location: login.php');
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,16 +38,16 @@
                 <?php
                     include 'db.php';
                     
-                    $sql="SELECT products.id, products.name, products.price, categories.name AS category_name 
+                    $sql = "SELECT products.id, products.name, products.price, categories.name AS category_name 
                     FROM products 
                     INNER JOIN categories ON products.category_id = categories.id";
-                    $result=$conn->query($sql);
+                    $result = $conn->query($sql);
 
-                    if(!$result){
-                        die("Invalid Query: " . $$conn->error);
+                    if (!$result) {
+                        die("Invalid Query: " . $conn->error);
                     }
 
-                    while($row = $result->fetch_assoc()){
+                    while ($row = $result->fetch_assoc()) {
                         echo "
                         <tr>
                             <td>$row[id]</td>
@@ -52,7 +62,6 @@
         </table>
     </div>
     
-    
     <div class="container my-5">
         <h2>List of Categories</h2>
         <table class="table table-responsive table-info table-hover">
@@ -66,14 +75,14 @@
                 <?php
                     include 'db.php';
                     
-                    $sql2="SELECT * FROM categories";
-                    $result=$conn->query($sql2);
+                    $sql2 = "SELECT * FROM categories";
+                    $result = $conn->query($sql2);
 
-                    if(!$result){
-                        die("Invalid Query: " . $$conn->error);
+                    if (!$result) {
+                        die("Invalid Query: " . $conn->error);
                     }
 
-                    while($row = $result->fetch_assoc()){
+                    while ($row = $result->fetch_assoc()) {
                         echo "
                         <tr>
                             <td>$row[id]</td>
@@ -85,7 +94,6 @@
             </tbody>
         </table>
     </div>
-
 </body>
 
 </html>

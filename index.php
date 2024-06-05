@@ -26,7 +26,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
-    <title>Admin Login</title>
+    <title>PMS</title>
 </head>
 
 <body>
