@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
             background: url('login-background.jpg') no-repeat center center fixed;
             background-size: cover;

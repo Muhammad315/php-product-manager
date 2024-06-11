@@ -66,6 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="general.css">
+    <script src="script.js"></script>
     <title>PMS | Sign Up</title>
 </head>
 <body>
@@ -82,35 +83,47 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
         ?>
 
-        <form method="post">
+        <form name="myForm" method="post" onsubmit="return validateForm()">
             <div class="row mb-3">
                 <label for="name" class="col-sm-3 col-form-label">Name</label>
                 <div class="col-sm-6">
                     <input type="text" name="name" id="name" class="form-control" value="<?php echo $name; ?>">
+                    <span id="name-error" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="email" class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-6">
                     <input type="email" name="email" id="email" class="form-control" value="<?php echo $email; ?>">
+                    <span id="email-error" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="password" class="col-sm-3 col-form-label">Password</label>
                 <div class="col-sm-6">
                     <input type="password" name="password" id="password" class="form-control" value="<?php echo $password; ?>">
+                    <span id="password-error" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm Password</label>
+                <div class="col-sm-6">
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" value="">
+                    <span id="confirmPassword-error" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="companyName" class="col-sm-3 col-form-label">Company Name</label>
                 <div class="col-sm-6">
                     <input type="text" name="companyName" id="companyName" class="form-control" value="<?php echo $companyName; ?>">
+                    <span id="companyName-error" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="phone" class="col-sm-3 col-form-label">Phone</label>
                 <div class="col-sm-6">
-                    <input type="tel" name="phone" id="phone" class="form-control" value="<?php echo $phone; ?>">
+                    <input type="tel" name="phone" id="phone" class="form-control" maxlength="11" value="<?php echo $phone; ?>">
+                    <span id="phone-error" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
@@ -125,6 +138,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             }
                         ?>
                     </select>
+                    <span id="countries-error" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
@@ -142,6 +156,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <input type="radio" name="companyType" id="service-based" class="form-check-input" value="service-based" <?php echo ($companyType === 'service-based') ? 'checked' : ''; ?>>
                         <label for="service-based" class="form-check-label">Service</label>
                     </div>
+                    <span id="companyType-error" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
@@ -159,6 +174,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <input type="checkbox" name="paymentMethod[]" id="credit-card" class="form-check-input" value="credit-card" <?php echo (in_array('credit-card', $paymentMethod)) ? 'checked' : ''; ?>>
                         <label for="credit-card" class="form-check-label">Credit Card</label>
                     </div>
+                    <span id="paymentMethod-error" class="text-danger"></span>
                 </div>
             </div>
 
