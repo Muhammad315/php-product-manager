@@ -9,6 +9,7 @@ PHP Product Manager is a web application designed to manage user profiles, produ
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
+- [Credits](#credits)
 - [License](#license)
 
 ## File Structure
