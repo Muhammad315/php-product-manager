@@ -184,7 +184,7 @@ php-product-manager/
 
 ## Credits
 
-Created by [Muhammad Muzzamil Khan].
+Created by Muhammad Muzzamil Khan
 
 ## License
 
@@ -192,4 +192,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-Explore and contribute to PHP Product Manager to enhance its functionality. If you have questions or suggestions, please open an issue or contact [khanmuhammadmuzzamil500@gmail.com].
+Explore and contribute to PHP Product Manager to enhance its functionality. If you have questions or suggestions, please open an issue or contact khanmuhammadmuzzamil500@gmail.com
