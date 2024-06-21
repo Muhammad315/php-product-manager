@@ -2,21 +2,50 @@
 session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
-    header('Location: ../login.php');
+    header('Location: ../../login.php');
     exit;
 }
 
+$p_id =  "";
 $p_name = "";
 $p_price = "";
 $p_category = "";
 
 $errorMessage = "";
-$successMessage = "";
+$successMessage= "";
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $p_name = $_POST["product_name"];
-    $p_price = $_POST["product_price"];
-    $p_category = $_POST["categories"];
+include '../../includes/db.php';
+
+if($_SERVER['REQUEST_METHOD'] == 'GET'){
+
+    if(!isset($_GET['id'])){
+        header("location: ../../dashboard.php");
+        exit;
+    }
+
+    $p_id = $_GET['id'];
+
+
+    $sql = "SELECT * FROM products WHERE id = $p_id";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    if(!$row){
+        header("location: ../../dashboard.php");
+        exit;
+    }
+
+    $p_name = $row['name'];
+    $p_price = $row['price'];
+    $p_category = $row['category_id'];
+
+
+}else{
+
+    $p_id = $_POST['product_id'];
+    $p_name = $_POST['product_name'];
+    $p_price = $_POST['product_price'];
+    $p_category = $_POST['categories'];
 
     do{
         if(empty($p_name) || empty($p_price) || empty($p_category)){
@@ -24,30 +53,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             break;
         }
 
-        include '../db.php';
-
-        $sql = "INSERT INTO products (name, price, category_id)
-        VALUES ('$p_name', '$p_price', '$p_category')";
+        $sql = "UPDATE products SET name = '$p_name', price = '$p_price', category_id = '$p_category' WHERE id = $p_id";
 
         $result = $conn->query($sql);
 
         if(!$result){
-            $errorMessage = "Invalid Query: " . $conn->error;
-            break;
+            $errorMessage = "Invalid query: " . $conn->error;
         }
 
-        $p_name = "";
-        $p_price = "";
-        $p_category = "";
+        $successMessage = "Product Updated Successfully";
 
-        $successMessage = "Product Added Successfully";
-
-        header("location: ../products.php");
+        header("location: ../../products.php");
         exit;
 
     }while(false);
+        
 }
-
 
 ?>
 
@@ -59,12 +80,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../general.css">
-    <title>PMS | Add Product</title>
+    <link rel="stylesheet" href="../../assets/css/general.css">
+    <title>PMS | Update Product</title>
 </head>
 <body>
     <div class="container my-5">
-        <h2>Add Prodeuct</h2>
+        <h2>Update Prodeuct</h2>
         <?php
         if(!empty($errorMessage)){
             echo "
@@ -77,6 +98,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         ?>
 
         <form method="post">
+            <input type="hidden" name="product_id" value="<?php echo $p_id; ?>">
             <div class="row mb-3">
                 <label for="product_name" class="col-sm-3 col-form-label">Name</label>
                 <div class="col-sm-6">
@@ -95,7 +117,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <select name="categories" id="categories" class="form-control">
                         <option value="<?php echo $p_category; ?>" selected>Select Category</option>
                         <?php
-                            include '../db.php';
+                            include '../../includes/db.php';
 
                             $sql = "SELECT * FROM categories";
                             $result = $conn->query($sql);
@@ -134,7 +156,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a href="../products.php" class="btn btn-outline-primary" role="button">Cancel</a>
+                    <a href="../../products.php" class="btn btn-outline-primary" role="button">Cancel</a>
                 </div>
             </div>
         </form>

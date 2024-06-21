@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'user') {
     exit;
 }
 
-include 'db.php';
+include 'includes/db.php';
 
 $categoriesSql = "SELECT * FROM categories";
 $categoriesResult = $conn->query($categoriesSql);
@@ -18,7 +18,7 @@ $categoriesResult = $conn->query($categoriesSql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="assets/css/general.css">
     <title>PMS | Home</title>
 </head>
 <body>
@@ -56,7 +56,7 @@ $categoriesResult = $conn->query($categoriesSql);
                 var categoryId = $(this).data('id');
 
                 $.ajax({
-                    url: 'fetch_products.php',
+                    url: 'includes/fetch_products.php',
                     method: 'GET',
                     data: { category_id: categoryId },
                     success: function(data) {

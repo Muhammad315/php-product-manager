@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include 'db.php';
+    include 'includes/db.php';
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             align-items: center;
             flex-direction: column;
             height: 100vh;
-            background: url('login-background.jpg') no-repeat center center fixed;
+            background: url('assets/images/login-background.jpg') no-repeat center center fixed;
             background-size: cover;
         }
         .card {

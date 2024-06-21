@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('login-background.jpg') no-repeat center center fixed;
+            background: url('assets/images/login-background.jpg') no-repeat center center fixed;
             background-size: cover;
         }
 

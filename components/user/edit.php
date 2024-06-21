@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
-    header('Location: ../login.php');
+    header('Location: ../../login.php');
     exit;
 }
 
@@ -19,12 +19,12 @@ $paymentMethod = [];
 $errorMessage = "";
 $successMessage= "";
 
-include '../db.php';
+include '../../includes/db.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
     if(!isset($_GET['id'])){
-        header("location: ../dashboard.php");
+        header("location: ../../dashboard.php");
         exit;
     }
 
@@ -35,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $row = $result->fetch_assoc();
 
     if(!$row){
-        header("location: ../dashboard.php");
+        header("location: ../../dashboard.php");
         exit;
     }
 
@@ -77,7 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
         $successMessage = "User Updated Successfully";
 
-        header("location: ../users.php");
+        header("location: ../../users.php");
         exit;
 
     }while(false);
@@ -94,7 +94,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../general.css">
+    <link rel="stylesheet" href="../../assets/css/general.css">
     <title>PMS | Update User</title>
 </head>
 <body>
@@ -213,7 +213,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="col-sm-3 d-grid">
-                    <a href="../users.php" class="btn btn-outline-primary" role="button">Cancel</a>
+                    <a href="../../users.php" class="btn btn-outline-primary" role="button">Cancel</a>
                 </div>
             </div>
         </form>
