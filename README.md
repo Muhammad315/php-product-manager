@@ -9,6 +9,7 @@ PHP Product Manager is a web application designed to manage user profiles, produ
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
+- [Screenshots](#screenshots)
 - [Credits](#credits)
 - [License](#license)
 
@@ -182,6 +183,14 @@ php-product-manager/
 
     - Push your branch: `git push origin feature-name`.
     - Go to GitHub and create a pull request for review.
+
+## Screenshots
+
+### PMS Admin View
+![Admin View](screenshots/pms_admin_dashboard.png)
+
+### PMS User View
+![User View](screenshots/pms_user_screen.png)
 
 ## Credits
 
