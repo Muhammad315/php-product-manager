@@ -123,8 +123,8 @@ php-product-manager/
     <?php
     $host = 'localhost';
     $dbname = 'pms_db_php';
-    $username = 'yourusername';
-    $password = 'yourpassword';
+    $username = 'YOUR_USERNAME';
+    $password = 'YOUR_PASSWORD';
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -134,7 +134,7 @@ php-product-manager/
     ?>
     ```
 
-    **Note:** Replace `yourusername` and `yourpassword` with your actual MySQL credentials.
+    **Note:** Replace `YOUR_USERNAME` and `YOUR_PASSWORD` with your actual MySQL credentials.
 
 4. **Start the local server**
 
